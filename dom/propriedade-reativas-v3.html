@@ -1,0 +1,51 @@
+<script src="https://unpkg.com/vue"></script>
+
+<div id="app">
+    <button v-on:click="aumentar">Aumentar</button>
+    <button v-on:click="contador2++">Aumentar 2</button>
+    <button v-on:click="diminuir">Diminuir</button>
+    <p>Contador: {{contador}} | {{contador2}}</p>
+    <!-- como resultador está em 'computed' e não em 'methods', não precisa ser chamado como função, terminando com ()-->
+    <p>Resultado: {{resultado}}</p>
+</div>
+
+<script>
+    new Vue({
+        el:'#app',
+        data: {
+            contador: 0,
+            contador2: 0
+        },
+        //o console.log só vai aparecer quando for chamada a função 'resultado()'
+        computed: {
+            resultado(){
+                console.log('metodo computed resultado chamado...')
+                return this.contador >= 5 ? 'Maior ou igual a 5 =)' : 'Menor que 5 =('
+            }
+        },
+        //watch deve ter conflito, com ele pode-se especificar qual propriedade se quer monitorar
+        watch: {
+            contador(novo, antigo){
+                console.log(novo, antigo)
+                setTimeout(() => {
+                    this.contador = 0
+                }, 2000)
+            }
+            /* ou pode-se fazer da forma abaixo:
+            contador(novo, antigo){
+                const instanciaVue = this
+                setTimeout(function() {
+                    instanciaVue.contador = 0
+                }, 2000)
+            */
+        },
+        methods: {
+            aumentar(){
+                this.contador++
+            },
+            diminuir(){
+                this.contador--
+            }
+        }
+    })
+</script>

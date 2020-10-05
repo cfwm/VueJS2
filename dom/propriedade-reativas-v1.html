@@ -1,0 +1,22 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<div id="app">
+    <!-- two-way binding-->
+    <p>{{ titulo }}</p>
+    <input type="text" v-bind:value="titulo"
+    v-on:input="titulo = $event.target.value">
+
+    <!-- two-way binding melhorado-->
+    <p>{{ tituloDois }}</p>
+    <input type="text" v-model="tituloDois">
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            titulo: 'Usando VueJS!',
+            tituloDois: 'Olá VUE!'
+        }
+    })
+</script>
