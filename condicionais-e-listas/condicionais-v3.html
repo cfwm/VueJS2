@@ -9,7 +9,7 @@
     
     <p v-else-if="anonimo">Navegando como anônimo.</p>
     <p v-else>Nenhum usuário logado</p>
-    <button @clcik="logado = !logado">{{logado ? 'Sair' : 'Entrar'}}</button>
+    <button @click="logado = !logado">{{logado ? 'Sair' : 'Entrar'}}</button>
     <input type="checkbox" v-model="anonimo">
 </div>
 
