@@ -1,0 +1,44 @@
+<meta charset="UTF-8">
+<script src="https://unpkg.com/vue"></script>
+
+<div id="app">
+    <h1>{{ titulo }}</h1>
+    <button @click="titulo += '#'">Alterar Título</button>
+    <!-- a função $destroy(), é uma função nativa do Vue, o que é indicado pelo $, e quando ela é acionada o Vue deixa de funcionar.-->
+    <button @click="$destroy()">Destruir</button>
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            titulo: 'Ciclo de Vida'
+        },
+        beforeCreate() {
+            console.log('Antes de Criar')
+        },
+        created() {
+            console.log('Criado')
+        },
+        beforeMount() {
+            console.log('Antes de montar (DOM)')
+        },
+        mounted() {
+            console.log('DOM Montada')
+        },
+        //os métodos acima são chamados uma única vez, quando a instância é iniciada. Já os dois métodos abaixo são chamados sempre que a instância for atualizada.
+        beforeUpdate() {
+            console.log('Antes de Atualizar')
+        },
+        updated() {
+            console.log('Atualizado')
+        },
+        beforeDestroy() {
+            console.log('Antes de Destruir')
+        },
+        destroy() {
+            console.log('Destruido')
+        }
+        //o destroy não precisa ser chamado em uma aplicação Vue, pois se for usado ele fará o Vue deixar de monitorar toda a aplicação.
+    })
+</script>

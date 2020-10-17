@@ -1,0 +1,52 @@
+
+<meta charset="UTF-8">
+<script src="https://unpkg.com/vue"></script>
+
+<div id="app">
+   <comp></comp>
+   <comp></comp>
+   <comp></comp>
+</div>
+
+<script>
+    const dados = {
+        aula: 'Aula: Montando Componente Vue',
+        modulo: 'Módulo: Componente Vue'
+    }
+    //criando um componente Vue
+    Vue.component('comp', {
+        template: `
+            <div>
+                <h1>{{ aula }}</h1>
+                <h2>{{ modulo }}</h2>
+                <button @click="alterarAula">Alterar Aula</button>
+                <button @click="alterarModulo">Alterar Módulo</button>
+            </div>    
+        `,
+        //em um contexto de componente, data deve apontar para uma função, que deve retornar um objeto com o dados. 
+        //Dessa forma, podemos instanciar vários componentes, cada um com seu estado, sem interferir no outro
+        data: function() {
+            // return {
+            //     aula: 'Aula: Montando Instância Vue',
+            //     modulo: 'Módulo: Instância Vue'
+            // }    
+            //ou podemos retornar uma constante que possui um objeto, de modo que os dados de todos componentes tornam-se compartilhados, se um é alterado, todos são alterados:
+            return dados
+        },
+        methods: {
+            alterarAula() {
+                this.aula += '#'
+            },
+            alterarModulo() {
+                this.modulo += '#'
+                console.log(this.$ref.aulaRef.innerText)
+            }
+        }
+    })
+
+    const vm = new Vue({
+        el: '#app',
+        //o el (a instância Vue) pode ser montando a partir de um componenete, como é o caso, id ou classe. Mas atenção, uma instância Vue não é um componente Vue,
+        //por isso a instância não pode ser repetida, ao contrário do componente.
+    })
+</script>

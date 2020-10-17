@@ -1,0 +1,40 @@
+<meta charset="UTF-8">
+<script src="https://unpkg.com/vue"></script>
+
+<div id="app">
+   
+</div>
+
+<script>
+    const vm = new Vue({
+        // el: '#app',
+        //se não tiver o el...
+        template: `
+            <div>
+                <h1>{{ aula }}</h1>
+                <h2>{{ modulo }}</h2>
+                <button @click="alterarAula">Alterar Aula</button>
+                <button @click="alterarModulo">Alterar Mpdulo</button>
+            </div>    
+        `,
+        //o template deve ser feito a partir de um unico elemento raiz e existem algumas restrições de highlight e autocomplete para a escrita do código.
+        data: {
+            aula: 'Aula: Montando Instância Vue',
+            modulo: 'Módulo: Instância Vue'
+        },
+        methods: {
+            alterarAula() {
+                this.aula += '#'
+            },
+            alterarModulo() {
+                this.modulo += '#'
+                console.log(this.$ref.aulaRef.innerText)
+            }
+        }
+    })
+    //... o vue pode ser instanciado da seguinte forma:
+    //vm.$mount('#app')
+    //ou
+    vm.$mount()
+    document.querySelector('#app').appendChild(vm.$el)
+</script>
