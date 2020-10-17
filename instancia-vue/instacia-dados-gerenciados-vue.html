@@ -1,0 +1,25 @@
+<meta charset="UTF-8">
+<script src="https://unpkg.com/vue"></script>
+
+<div id="app">
+    {{ titulo }} {{novaInfo}}
+    <!-- vm.novaInfo está criado, mas não é reativo e por isso não pode ser acessada pela instância vue -->
+    <button @click="alterar">Alterar</button>
+</div>
+
+<script>
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            titulo: 'Teste 1'       
+        },
+        methods: {
+            alterar() {
+                this.titulo += '!'
+            }
+        }
+    })
+    //vm.novaInfo não é reativo pois foi criado fora da instância vue.
+    vm.novaInfo = 'Teste'
+    console.log(vm.novaInfo)
+</script>

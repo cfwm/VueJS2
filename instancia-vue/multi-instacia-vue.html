@@ -1,0 +1,40 @@
+<meta charset="UTF-8">
+<script src="https://unpkg.com/vue"></script>
+
+<div id="app1">
+    {{ titulo1 }} {{ titulo2 }}
+    <!-- não é possível acessar titulo2 na instância app1 pq titulo2 está declarado na instância app2 -->
+    <button @click="alterar">Alterar</button>
+</div>
+
+<div id="app2">
+    {{ titulo1 }} {{ titulo2 }}
+    <!-- não é possível acessar titulo1 na instância app2 pq titulo1 está declarado na instância app1 -->
+    <button @click="alterar">Alterar</button>
+</div>
+
+<script>
+    new Vue({
+        el: '#app1',
+        data: {
+            titulo1: 'Teste 1'       
+        },
+        methods: {
+            alterar() {
+                this.titulo1 += '!!!'
+            }
+        }
+    })
+
+    new Vue({
+        el: '#app2',
+        data: {
+            titulo2: 'Teste 2'       
+        },
+        methods: {
+            alterar() {
+                this.titulo2 += '!!!'
+            }
+        }
+    })
+</script>

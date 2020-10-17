@@ -1,0 +1,50 @@
+<meta charset="UTF-8">
+
+<div id="app">
+    {{ nome }} {{ sobrenome }} {{ 3 * 4 + 2 - 1 }} {{ Math.pow(2, 3) }}
+</div>
+
+<script>
+    //Como o Vue funciona de baixo dos panos, de forma simples:
+    function MeuVue(params) {
+        this.$el = document.querySelector(params.el)
+        this.$data = params.data
+
+        for(let atr in this.$data){
+            Object.defineProperty(this, atr, {
+                get: () => {
+                    return this.$data[atr]
+                },
+                set: value => {
+                    this.$data[atr] = value
+                }
+            })
+        }
+
+        //interpolação
+        const regex = /\{\{([\s\w)(,.+*-]*)\}\}/g 
+        this.$el.innerHTML = this.$el.innerHTML.replace(regex, (match, $1) => {
+            const value = this[$1.trim()]
+            return value ? value : eval($1)
+        })
+    }
+
+    const vm = new MeuVue({
+        el: '#app',
+        data: {
+            nome: 'Maria',
+            sobrenome: 'Silva'
+        }
+    })
+
+    console.log(vm.nome)
+    console.log(vm.$data.nome)
+
+    vm.nome = 'Pedro'
+    console.log(vm.nome)
+    console.log(vm.$data.nome)
+
+    //não funciona pq o atributo idade não existe em vm.$data
+    // vm.$data.idade = 31
+    // console.log(vm.idade)
+</script>

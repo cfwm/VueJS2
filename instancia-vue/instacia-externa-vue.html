@@ -1,0 +1,54 @@
+<meta charset="UTF-8">
+<script src="https://unpkg.com/vue"></script>
+
+<div id="app1">
+    {{ titulo1 }} {{ titulo2 }}
+    <!-- não é possível acessar titulo2 na instância app1 pq titulo2 está declarado na instância app2 -->
+    <button @click="alterar">Alterar</button>
+</div>
+
+<div id="app2">
+    {{ titulo1 }} {{ titulo2 }}
+    <!-- não é possível acessar titulo1 na instância app2 pq titulo1 está declarado na instância app1 -->
+    <button @click="alterar">Alterar</button>
+</div>
+
+<script>
+    const vm1 = new Vue({
+    //ao colocar um instância vue em uma constante...
+        el: '#app1',
+        data: {
+            titulo1: 'Teste 1'       
+        },
+        methods: {
+            alterar() {
+                vm2.titulo2 += '???'
+            }
+        }
+    })
+
+    const vm2 = new Vue({
+        el: '#app2',
+        data: {
+            titulo2: 'Teste 2'       
+        },
+        methods: {
+            alterar() {
+                vm1.titulo1 += '!!!'
+                /* 
+                * é possível acessar e alterar a instância vue a partir de outra instância vue,
+                * basta chamar a constante na qual está armazenada a instância que se quer alterar/acessar. 
+                * Caso o vue seja responsável pelo frontend, este não é um cenário recomendado, é melhor criar uma única instância vue.
+                * Este cenário pode ser interessante em casos em que se tem um sistema feito com outros frameworks e com vue, com isso a instância 
+                * vue pode ser acessada pelo outro framework. Neste caso, é mais recomendado apenas acessar os dados da instância vue e 
+                * não modificá-los, embora isto tbm seja possível. 
+                */
+            }
+        }
+    })
+
+    //acessando um instância vue com javascript puro:
+    setTimeout(() => {
+        vm1.titulo1 = 'Alterado pelo timer!'
+    }, 2000)
+</script>
