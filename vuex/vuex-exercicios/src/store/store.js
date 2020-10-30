@@ -9,9 +9,9 @@ import * as getters from './getters'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-    //Com mudules, state, getters, mutations e actions são modularizadas, iso ajuda a organizar o código.  ++ O state serve para chamar o estado do módulo específico e o stateRoot para chamar o state global
+    //Com modules, state, getters, mutations e actions são modularizadas, isso ajuda a organizar o código.  ++ O state serve para chamar o estado do módulo específico e o stateRoot para chamar o state global
     //Com isso, os dados estão nos seus respectivos módulos. No módulo, pode-se chamar o state respectivo, 
-    //mas nos componentes onde o state é chamado deve-se acrescentar o módulo em que o state está. 
+    //mas nos componentes onde o state é chamado deve-se acrescentar o módulo em que o state está localizado. 
     //quando estes dados são acessados através de getters, isto é feito diretamente no módulo, sem necessidade de declarar o módulo.
     modules: { carrinho, parametros },
     //o state abaixo é utilizado pelo getters.js para agrupar dados e funções mais gerais
